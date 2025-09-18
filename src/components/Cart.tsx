@@ -1,4 +1,7 @@
-import { X, Plus, Minus, Trash2, ShoppingBag } from 'lucide-react';
+'use client';
+
+import { useState } from 'react';
+import { X, Plus, Minus, Trash2, ShoppingBag, CheckCircle2 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
@@ -14,6 +17,14 @@ import {
   SheetFooter,
 } from "@/components/ui/sheet"
 import { ScrollArea } from './ui/scroll-area';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 interface CartProps {
   isOpen: boolean;
@@ -34,6 +45,17 @@ export function Cart({
   onClearCart,
   totalPrice 
 }: CartProps) {
+  const [showOrderComplete, setShowOrderComplete] = useState(false);
+
+  const handleCheckout = () => {
+    setShowOrderComplete(true);
+    setTimeout(() => {
+      setShowOrderComplete(false);
+      onClearCart();
+      onClose();
+    }, 2000);
+  };
+
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('ru-RU', {
       style: 'currency',
@@ -176,7 +198,10 @@ export function Cart({
                         <Trash2 className="w-4 h-4 mr-2" />
                         Очистить
                     </Button>
-                    <Button className="w-full bg-primary hover:bg-primary/90">
+                    <Button 
+                        className="w-full bg-primary hover:bg-primary/90"
+                        onClick={handleCheckout}
+                    >
                         Оформить заказ
                     </Button>
                 </div>
@@ -184,6 +209,20 @@ export function Cart({
           </SheetFooter>
         )}
       </SheetContent>
+
+      <AlertDialog open={showOrderComplete}>
+        <AlertDialogContent className="max-w-[320px]">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center justify-center gap-2">
+              <CheckCircle2 className="w-5 h-5 text-green-500" />
+              Заказ оформлен!
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-center">
+              Спасибо за покупку! Ваш заказ успешно оформлен.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+        </AlertDialogContent>
+      </AlertDialog>
     </Sheet>
   );
 }
