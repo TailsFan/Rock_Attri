@@ -4,12 +4,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Badge } from './ui/badge';
 import { useState } from 'react';
-import { useAuth         {dialogContent && (
-          <DialogContent className="sm:max-w-md">
-            {dialogContent === 'login' && <Login onClose={() => setDialogContent(null)} />}
-            {dialogContent === 'register' && <Register onClose={() => setDialogContent(null)} />}
-          </DialogContent>
-        )}rom '@/context/AuthContext';
+import { useAuth } from '@/context/AuthContext';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { toast } from 'sonner';
@@ -112,21 +107,6 @@ export function Header({
                 </div>
             </div>
 
-            {!loading && !user && (
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                <DialogTrigger asChild>
-                    <Button variant="outline" onClick={() => { setIsMobileMenuOpen(false); setDialogContent('login'); }}>
-                        Войти
-                    </Button>
-                </DialogTrigger>
-                <DialogTrigger asChild>
-                    <Button onClick={() => { setIsMobileMenuOpen(false); setDialogContent('register'); }}>
-                        Регистрация
-                    </Button>
-                </DialogTrigger>
-              </div>
-            )}
-
             <nav className="flex-grow">
                  {categories.map((category) => (
                     <Button
@@ -143,22 +123,39 @@ export function Header({
 
             <Separator className="my-4" />
 
-            {!loading && user && (
-              <div className="space-y-2">
-                 <p className="font-semibold px-3 truncate">{user.email}</p>
-                 {(userProfile?.role === 'admin' || userProfile?.role === 'manager') && (
-                    <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)}>
-                      <Button variant="ghost" className="w-full justify-start">
-                        <LayoutDashboard className="mr-2 h-4 w-4" />
-                        <span>{adminPanelLabel}</span>
-                      </Button>
-                    </Link>
-                  )}
-                 <Button variant="ghost" onClick={handleLogout} className="w-full justify-start">
-                    <LogOut className="mr-2 h-4 w-4" />
-                    <span>Выйти</span>
-                  </Button>
-              </div>
+            {!loading && (
+              user ? (
+                <div className="space-y-2">
+                   <p className="font-semibold px-3 truncate">{user.email}</p>
+                   {(userProfile?.role === 'admin' || userProfile?.role === 'manager') && (
+                      <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)}>
+                        <Button variant="ghost" className="w-full justify-start">
+                          <LayoutDashboard className="mr-2 h-4 w-4" />
+                          <span>{adminPanelLabel}</span>
+                        </Button>
+                      </Link>
+                    )}
+                   <Button variant="ghost" onClick={handleLogout} className="w-full justify-start">
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>Выйти</span>
+                    </Button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-2">
+                    <Button variant="outline" onClick={() => { 
+                        setIsMobileMenuOpen(false);
+                        setDialogContent('login');
+                    }}>
+                        Войти
+                    </Button>
+                    <Button onClick={() => { 
+                        setIsMobileMenuOpen(false);
+                        setDialogContent('register');
+                    }}>
+                        Регистрация
+                    </Button>
+                </div>
+              )
             )}
         </div>
       </SheetContent>
@@ -276,12 +273,8 @@ export function Header({
           </nav>
         </div>
         
-        {dialogContent && (
-          <DialogContent className="sm:max-w-md">
-            {dialogContent === 'login' && <Login onClose={() => setDialogContent(null)} />}
-            {dialogContent === 'register' && <Register onClose={() => setDialogContent(null)} />}
-          </DialogContent>
-        )}
+        {dialogContent === 'login' && <Login onClose={() => setDialogContent(null)} />}
+        {dialogContent === 'register' && <Register onClose={() => setDialogContent(null)} />}
       </Dialog>
     </header>
   );

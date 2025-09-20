@@ -46,7 +46,7 @@ export default function Register({ onClose }: RegisterProps) {
   };
 
   return (
-    <>
+    <DialogContent className="sm:max-w-md">
       <DialogHeader>
         <DialogTitle>Регистрация</DialogTitle>
         <DialogDescription>
@@ -101,6 +101,6 @@ export default function Register({ onClose }: RegisterProps) {
           <Button onClick={handleRegister}>Зарегистрироваться</Button>
         </DialogClose>
       </DialogFooter>
-    </>
+    </DialogContent>
   );
 }

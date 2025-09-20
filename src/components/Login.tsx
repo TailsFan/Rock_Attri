@@ -34,7 +34,7 @@ export default function Login({ onClose }: LoginProps) {
   };
 
   return (
-    <>
+    <DialogContent className="sm:max-w-md">
       <DialogHeader>
         <DialogTitle>Вход</DialogTitle>
         <DialogDescription>
@@ -77,6 +77,6 @@ export default function Login({ onClose }: LoginProps) {
            <Button onClick={handleLogin}>Войти</Button>
         </DialogClose>
       </DialogFooter>
-    </>
+    </DialogContent>
   );
 }
