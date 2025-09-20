@@ -4,7 +4,12 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Badge } from './ui/badge';
 import { useState } from 'react';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth         {dialogContent && (
+          <DialogContent className="sm:max-w-md">
+            {dialogContent === 'login' && <Login onClose={() => setDialogContent(null)} />}
+            {dialogContent === 'register' && <Register onClose={() => setDialogContent(null)} />}
+          </DialogContent>
+        )}rom '@/context/AuthContext';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { toast } from 'sonner';
@@ -271,8 +276,12 @@ export function Header({
           </nav>
         </div>
         
-        {dialogContent === 'login' && <Login onClose={() => setDialogContent(null)} />}
-        {dialogContent === 'register' && <Register onClose={() => setDialogContent(null)} />}
+        {dialogContent && (
+          <DialogContent className="sm:max-w-md">
+            {dialogContent === 'login' && <Login onClose={() => setDialogContent(null)} />}
+            {dialogContent === 'register' && <Register onClose={() => setDialogContent(null)} />}
+          </DialogContent>
+        )}
       </Dialog>
     </header>
   );
