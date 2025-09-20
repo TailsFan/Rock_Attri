@@ -93,16 +93,21 @@ export function Header({
             </Link>
           </SheetTitle>
         </SheetHeader>
-        {!loading && !user && (
-          <div className="px-4 py-2">
-            <div className="grid grid-cols-2 gap-2">
-              <Button variant="outline" onClick={() => { setIsMobileMenuOpen(false); setDialogContent('login'); }}>
-                Войти
-              </Button>
-              <Button onClick={() => { setIsMobileMenuOpen(false); setDialogContent('register'); }}>
-                Регистрация
-              </Button>
-            </div>
+        {!loading && user && (
+          <div className="space-y-2 px-4 py-2 border-b border-border">
+            <p className="font-semibold truncate">{user.email}</p>
+            {(userProfile?.role === 'admin' || userProfile?.role === 'manager') && (
+              <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button variant="ghost" className="w-full justify-start">
+                  <LayoutDashboard className="mr-2 h-4 w-4" />
+                  <span>{adminPanelLabel}</span>
+                </Button>
+              </Link>
+            )}
+            <Button variant="ghost" onClick={handleLogout} className="w-full justify-start">
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>Выйти</span>
+            </Button>
           </div>
         )}
         <div className="py-4 flex flex-col h-full">
@@ -135,24 +140,7 @@ export function Header({
 
             <Separator className="my-4" />
 
-            {!loading && (
-              user ? (
-                <div className="space-y-2">
-                   <p className="font-semibold px-3 truncate">{user.email}</p>
-                   {(userProfile?.role === 'admin' || userProfile?.role === 'manager') && (
-                      <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)}>
-                        <Button variant="ghost" className="w-full justify-start">
-                          <LayoutDashboard className="mr-2 h-4 w-4" />
-                          <span>{adminPanelLabel}</span>
-                        </Button>
-                      </Link>
-                    )}
-                   <Button variant="ghost" onClick={handleLogout} className="w-full justify-start">
-                      <LogOut className="mr-2 h-4 w-4" />
-                      <span>Выйти</span>
-                    </Button>
-                </div>
-              ) : (
+            {!loading && !user && (
                 <div className="grid grid-cols-2 gap-2">
                     <Button variant="outline" onClick={() => { 
                         setIsMobileMenuOpen(false);
@@ -167,7 +155,6 @@ export function Header({
                         Регистрация
                     </Button>
                 </div>
-              )
             )}
         </div>
       </SheetContent>
