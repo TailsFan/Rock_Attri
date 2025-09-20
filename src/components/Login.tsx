@@ -34,7 +34,7 @@ export default function Login({ onClose }: LoginProps) {
   };
 
   return (
-    <DialogContent className="sm:max-w-md">
+    <DialogContent className="w-full sm:max-w-md">
       <DialogHeader>
         <DialogTitle>Вход</DialogTitle>
         <DialogDescription>

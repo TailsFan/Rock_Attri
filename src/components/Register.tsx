@@ -46,7 +46,7 @@ export default function Register({ onClose }: RegisterProps) {
   };
 
   return (
-    <DialogContent className="sm:max-w-md">
+    <DialogContent className="w-full sm:max-w-md">
       <DialogHeader>
         <DialogTitle>Регистрация</DialogTitle>
         <DialogDescription>
