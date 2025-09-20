@@ -70,14 +70,47 @@ export function Cart({
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent className="flex flex-col w-full sm:max-w-md p-0">
         <SheetHeader className="p-4 border-b">
-           <SheetTitle className="flex items-center space-x-2">
-              <ShoppingBag className="w-5 h-5 text-primary" />
-              <span>Корзина</span>
-              {cart.length > 0 && (
-                <Badge variant="secondary">{totalItems}</Badge>
-              )}
-            </SheetTitle>
+           <SheetTitle className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <ShoppingBag className="w-5 h-5 text-primary" />
+                <span>Корзина</span>
+                {cart.length > 0 && (
+                  <Badge variant="secondary">{totalItems}</Badge>
+                )}
+              </div>
+           </SheetTitle>
         </SheetHeader>
+        
+        {cart.length > 0 && (
+          <div className="p-4 border-b">
+            <div className="space-y-4">
+              <div className="flex justify-between items-center text-lg">
+                <span>Итого:</span>
+                <span className="font-bold text-primary">
+                  {formatPrice(totalPrice)}
+                </span>
+              </div>
+              
+              <Separator />
+              
+              <div className="grid grid-cols-2 gap-2">
+                <Button 
+                  variant="outline" 
+                  onClick={onClearCart}
+                >
+                  <Trash2 className="w-4 h-4 mr-2" />
+                  Очистить
+                </Button>
+                <Button 
+                  className="w-full bg-primary hover:bg-primary/90"
+                  onClick={handleCheckout}
+                >
+                  Оформить заказ
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="flex-1 overflow-hidden">
            {cart.length === 0 ? (
@@ -178,36 +211,7 @@ export function Cart({
           )}
         </div>
 
-        {cart.length > 0 && (
-          <SheetFooter className="p-4 border-t">
-             <div className="w-full space-y-4">
-                <div className="flex justify-between items-center text-lg">
-                    <span>Итого:</span>
-                    <span className="font-bold text-primary">
-                        {formatPrice(totalPrice)}
-                    </span>
-                </div>
-                
-                <Separator />
-                
-                <div className="grid grid-cols-2 gap-2">
-                    <Button 
-                        variant="outline" 
-                        onClick={onClearCart}
-                        >
-                        <Trash2 className="w-4 h-4 mr-2" />
-                        Очистить
-                    </Button>
-                    <Button 
-                        className="w-full bg-primary hover:bg-primary/90"
-                        onClick={handleCheckout}
-                    >
-                        Оформить заказ
-                    </Button>
-                </div>
-             </div>
-          </SheetFooter>
-        )}
+
       </SheetContent>
 
       <AlertDialog open={showOrderComplete}>
