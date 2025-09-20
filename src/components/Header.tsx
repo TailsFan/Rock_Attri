@@ -16,7 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Dialog, DialogTrigger, DialogContent } from './ui/dialog';
+import { Dialog, DialogTrigger } from './ui/dialog';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet';
 import Login from './Login';
 import Register from './Register';
@@ -176,7 +176,7 @@ export function Header({
 
   return (
     <header className="bg-card border-b border-border sticky top-0 z-40">
-      <Dialog onOpenChange={(open) => !open && setDialogContent(null)}>
+      <Dialog open={!!dialogContent} onOpenChange={(open) => !open && setDialogContent(null)}>
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-2">
