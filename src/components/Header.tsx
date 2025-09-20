@@ -93,6 +93,18 @@ export function Header({
             </Link>
           </SheetTitle>
         </SheetHeader>
+        {!loading && !user && (
+          <div className="px-4 py-2">
+            <div className="grid grid-cols-2 gap-2">
+              <Button variant="outline" onClick={() => { setIsMobileMenuOpen(false); setDialogContent('login'); }}>
+                Войти
+              </Button>
+              <Button onClick={() => { setIsMobileMenuOpen(false); setDialogContent('register'); }}>
+                Регистрация
+              </Button>
+            </div>
+          </div>
+        )}
         <div className="py-4 flex flex-col h-full">
             <div className="mb-4">
                  <div className="relative">
