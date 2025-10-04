@@ -162,7 +162,7 @@ export function Header({
   );
 
   return (
-    <header className="bg-card border-b border-border sticky top-0 z-40">
+    <header className="bg-card border-b border-border sticky top-0 z-40 pt-safe">
       <Dialog open={!!dialogContent} onOpenChange={(open) => !open && setDialogContent(null)}>
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">

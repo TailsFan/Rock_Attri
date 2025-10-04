@@ -25,6 +25,7 @@
     --ring: 346.8 77.2% 49.8%;
     --radius: 0.5rem;
     --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
   }
  
   .dark {
@@ -70,5 +71,17 @@
   
   .bottom-safe {
     bottom: var(--safe-area-inset-bottom);
+  }
+  
+  .pt-safe {
+    padding-top: calc(1rem + var(--safe-area-inset-top));
+  }
+  
+  .mt-safe {
+    margin-top: calc(1rem + var(--safe-area-inset-top));
+  }
+  
+  .top-safe {
+    top: var(--safe-area-inset-top);
   }
 }
