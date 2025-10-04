@@ -24,6 +24,7 @@
     --input: 240 3.7% 15.9%;
     --ring: 346.8 77.2% 49.8%;
     --radius: 0.5rem;
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
   }
  
   .dark {
@@ -55,5 +56,19 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: calc(1.5rem + var(--safe-area-inset-bottom));
+  }
+  
+  .mb-safe {
+    margin-bottom: calc(1rem + var(--safe-area-inset-bottom));
+  }
+  
+  .bottom-safe {
+    bottom: var(--safe-area-inset-bottom);
   }
 }

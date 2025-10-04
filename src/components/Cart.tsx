@@ -82,7 +82,7 @@ export function Cart({
         </SheetHeader>
         
         {cart.length > 0 && (
-          <div className="p-4 border-b">
+          <div className="p-4 border-b pb-safe">
             <div className="space-y-4">
               <div className="flex justify-between items-center text-lg">
                 <span>Итого:</span>

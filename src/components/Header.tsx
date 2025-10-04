@@ -141,7 +141,7 @@ export function Header({
             <Separator className="my-4" />
 
             {!loading && !user && (
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-2 pb-safe">
                     <Button variant="outline" onClick={() => { 
                         setIsMobileMenuOpen(false);
                         setDialogContent('login');
